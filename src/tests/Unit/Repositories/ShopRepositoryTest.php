@@ -4,20 +4,30 @@ namespace Tests\Unit;
 
 use App\Domain\Entities\Shop;
 use App\Infrastructure\ShopRepository;
-use App\Models\Shop as EloquentShop;
+use App\Models\Ballpark as EloquentBallpark;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+
+use function PHPUnit\Framework\assertSame;
 
 class ShopRepositoryTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     private ShopRepository $shopRepository;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->shopRepository = new ShopRepository(new EloquentShop());
+        // 親テーブルとなる球場ダミーデータを作成
+        EloquentBallpark::factory(10)->create();
+        $this->shopRepository = new ShopRepository();
+    }
+
+    public function tearDown(): void
+    {
+        $this->artisan('migrate:refresh');
+        parent::tearDown();
     }
 
     /**

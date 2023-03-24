@@ -12,12 +12,6 @@ use App\Models\Shop as EloquentShop;
  */
 class ShopRepository implements IShopRepository
 {
-    private EloquentShop $eloquentShop;
-
-    public function __construct(EloquentShop $eloquentShop)
-    {
-        $this->eloquentShop = $eloquentShop;
-    }   
 
     // public function findOrNullById(int $id): ?Shop
     // {
@@ -27,7 +21,7 @@ class ShopRepository implements IShopRepository
     public function create(Shop $shop): Shop
     {
         // DBに保存
-        $shopData = $this->eloquentShop->create([
+        $shopData = EloquentShop::create([
             'ballpark_id' => $shop->ballparkId,
             'name' => $shop->name
         ]);

@@ -12,18 +12,12 @@ use App\Models\Ballpark as EloquentBallpark;
  */
 class BallparkRepository implements IBallparkRepository
 {
-    private EloquentBallpark $eloquentBallpark;
-
-    public function __construct(EloquentBallpark $eloquentBallpark)
-    {
-        $this->eloquentBallpark = $eloquentBallpark;
-    }
-
     public function findOrNullById(int $id): ?Ballpark
     {
-        $ballparkData = $this->eloquentBallpark->find($id);
+        // LaravelのEloquentモデルを利用して、DBに保存されたデータからインスタンスを取得
+        $ballparkData = \App\Models\Ballpark::find($id);
         
-        // Eloquentのモデルから、ドメインオブジェクトに詰め替える
+        // Eloquentモデルから、ドメインオブジェクトに詰め替える
         if (!$ballparkData) return null;
 
         return new Ballpark(

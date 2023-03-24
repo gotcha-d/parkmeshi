@@ -17,7 +17,7 @@ class BallparkRepositoryTest extends TestCase
     public function setUp() :void
     {
         parent::setUp();
-        $this->ballparkRepository = new BallparkRepository(new EloquentBallpark());
+        $this->ballparkRepository = new BallparkRepository();
     }
 
     /**
