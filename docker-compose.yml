@@ -19,7 +19,15 @@ services:
     build: ./infra/mysql
     volumes:
       - db-store:/var/lib/mysql
-
+      - ./infra/mysql/my.cnf:/etc/my.cnf # mysqlの文字コード設定
+  
+  # テスト用DBコンテナ
+  db-testing:
+    build: ./infra/mysql
+    volumes:
+      # データの永続化は不要
+      # - db-store:/var/lib/mysql
+      - ./infra/mysql/my.cnf:/etc/my.cnf # mysqlの文字コード設定 
 # データを永続化するためにトップレベルボリュームを定義
 volumes:
   db-store:
