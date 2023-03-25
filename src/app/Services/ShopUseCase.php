@@ -33,7 +33,7 @@ class ShopUseCase
         // 球場の存在チェック
         $ballpark = $this->ballparkRepository->findOrNullById($ballparkId);
         if (!$ballpark) {
-            throw new BallparkNotFoundException('ID:' . $ballpark . 'の球場が見つかりません');
+            throw new BallparkNotFoundException('ID:' . $ballparkId . 'の球場が見つかりません');
         }
 
         // 店作成
